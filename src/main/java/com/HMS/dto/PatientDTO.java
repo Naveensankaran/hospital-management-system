@@ -19,6 +19,10 @@ public class PatientDTO {
     @Pattern(regexp = "^[6-9]\\d{9}$", message = "Invalid phone number! Must be 10 digits starting with 6-9")
     private String phoneNumber;
 
+    @Email(message = "Invalid email format")
+    @NotBlank(message = "Email is required")
+    private String email;
+
     @NotBlank(message = "Gender is required")
     private String gender;
 
@@ -31,12 +35,13 @@ public class PatientDTO {
     public PatientDTO() {}
 
     public PatientDTO(Long patientId, String name, Integer age, String address,
-                      String phoneNumber, String gender, String notes, String status) {
+                      String phoneNumber, String email, String gender, String notes, String status) {
         this.patientId = patientId;
         this.name = name;
         this.age = age;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.email = email;
         this.gender = gender;
         this.notes = notes;
         this.status = status;
@@ -81,6 +86,14 @@ public class PatientDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getGender() {
