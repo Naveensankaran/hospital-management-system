@@ -1,38 +1,49 @@
-package com.HMS.patient.dto;
+package com.HMS.entity;
 
-import jakarta.validation.constraints.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
-public class PatientDTO {
+import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "patient")
+public class Patient {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long patientId;
 
-    @NotBlank(message = "Name is required")
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @NotNull(message = "Age is required")
-    @Min(value = 0, message = "Age cannot be negative")
+    @Column(nullable = false)
     private Integer age;
 
+    @Column(length = 255)
     private String address;
 
-    @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^[6-9]\\d{9}$", message = "Invalid phone number! Must be 10 digits starting with 6-9")
+    @Column(name = "phone_number", nullable = false, unique = true, length = 15)
     private String phoneNumber;
 
-    @NotBlank(message = "Gender is required")
+
+    @Column(nullable = false, length = 10)
     private String gender;
 
+    @Column(columnDefinition = "TEXT")
     private String notes;
 
-    @Pattern(regexp = "Active|Inactive", message = "Status must be either 'Active' or 'Inactive'")
-    private String status;
+    @Column(nullable = false)
+    private String status = "Active"; // Active / Inactive
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     // ✅ Constructors
-    public PatientDTO() {}
+    public Patient() {}
 
-    public PatientDTO(Long patientId, String name, Integer age, String address,
-                      String phoneNumber, String gender, String notes, String status) {
-        this.patientId = patientId;
+    public Patient(String name, Integer age, String address, String phoneNumber, 
+                   String gender, String notes, String status) {
         this.name = name;
         this.age = age;
         this.address = address;
@@ -105,5 +116,13 @@ public class PatientDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

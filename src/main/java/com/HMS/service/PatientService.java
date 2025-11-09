@@ -1,9 +1,10 @@
-package com.HMS.patient.service;
+package com.HMS.service;
 
-import com.HMS.patient.dto.PatientDTO;
-import com.HMS.patient.entity.Patient;
-import com.HMS.patient.exception.PatientNotFoundException;
-import com.HMS.patient.repository.PatientRepository;
+import com.HMS.dto.PatientDTO;
+import com.HMS.entity.Patient;
+import com.HMS.exception.PatientNotFoundException;
+import com.HMS.repository.PatientRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
