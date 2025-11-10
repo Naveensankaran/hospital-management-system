@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.HMS.entity.Patient;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
@@ -20,4 +21,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     // 🔍 Find patients by gender
     List<Patient> findByGender(String gender);
+    
+    Optional<Patient> findByNameAndPhoneNumber(String name, String phoneNumber);
 }
